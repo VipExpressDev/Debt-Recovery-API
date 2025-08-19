@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\inetpub\wwwroot\DR Staging</_PublishTargetUrl>
+    <History>True|2024-10-23T09:04:08.7296715Z;True|2024-10-23T11:02:23.7854609+02:00;True|2024-10-23T11:01:26.7232995+02:00;True|2024-10-23T11:01:12.5381336+02:00;True|2024-09-24T17:37:48.3697663+02:00;True|2024-08-19T17:59:27.2750361+02:00;True|2024-07-01T11:37:45.6580905+02:00;True|2023-10-13T12:43:54.6348030+02:00;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+</Project>
