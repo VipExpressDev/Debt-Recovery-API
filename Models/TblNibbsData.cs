@@ -13,6 +13,7 @@ namespace DebtRecoveryPlatform.Models
         public string MandateCode { get; set; }
         public string BillerName { get; set; }
         public string ContractNo { get; set; }
+        public string BookingRef { get; set; }
         public string AccountNumber { get; set; }
         public string AccountName { get; set; }
         public string PayerName { get; set; }

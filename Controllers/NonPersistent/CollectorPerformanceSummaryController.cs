@@ -46,7 +46,8 @@ namespace DebtRecoveryPlatform.Controllers.NonPersistent
             {
                 decimal AmtAssignedTotal = allDebtData.Where(w => w.AllocatedTo == item.Key).Sum(s => s.TransactionAmount);
                 decimal AmtCollected = allDebtData.Where(w => w.AllocatedTo == item.Key).Sum(s => s.CollectedAmount);
-                decimal AmtOutstanding = allDebtData.Where(w => w.AllocatedTo == item.Key).Sum(s => s.AmountDue);
+                //decimal AmtOutstanding = allDebtData.Where(w => w.AllocatedTo == item.Key).Sum(s => s.AmountDue);
+                decimal AmtOutstanding = AmtAssignedTotal - AmtCollected;
                 decimal AmtUnactionedTotal = allDebtData.Where(w => w.AllocatedTo == item.Key && w.StatusID == actionReqCode).Sum(s => s.TransactionAmount);
 
                 CollectorPerformanceSummary debtorPerformanceAccumilative = new CollectorPerformanceSummary()

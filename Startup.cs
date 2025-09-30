@@ -79,6 +79,13 @@ namespace DebtRecoveryPlatform
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            // Ensure database is up to date on startup
+            using (var scope = app.ApplicationServices.CreateScope())
+            {
+                var db = scope.ServiceProvider.GetRequiredService<dr_DBContext>();
+                db.Database.Migrate();  // <-- apply migrations automatically
+            }
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

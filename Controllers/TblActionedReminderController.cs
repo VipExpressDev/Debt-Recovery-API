@@ -60,6 +60,7 @@ namespace DebtRecoveryPlatform.Controllers
                     DebtReminder HistoryLine = new DebtReminder()
                     {
                         ContractNo = reminderItem.ContractNo,
+                        BookingRef = reminderItem.BookingRef,
                         ManagerName = managerName,
                         CollectorName = collectorName,
                         ReminderDate = reminderItem.ReminderDate,
@@ -73,6 +74,7 @@ namespace DebtRecoveryPlatform.Controllers
                     DebtReminder HistoryLine = new DebtReminder()
                     {
                         ContractNo = reminderItem.ContractNo,
+                        BookingRef = reminderItem.BookingRef,
                         ManagerName = managerName,
                         CollectorName = collectorName,
                         ReminderDate = reminderItem.ReminderDate,
@@ -91,7 +93,7 @@ namespace DebtRecoveryPlatform.Controllers
         public async Task<IActionResult> Post([FromBody] TblActionedReminder actionedReminder, [FromHeader] string Authorization)
         {
             var reminderList = await _ActionedReminderRepository.GetAll();
-            var updateRemindersList = reminderList.Where(w => w.ContractNo == actionedReminder.ContractNo).ToList();
+            var updateRemindersList = reminderList.Where(w => w.BookingRef == actionedReminder.BookingRef).ToList();
 
             if(updateRemindersList.Count() > 0)
             {

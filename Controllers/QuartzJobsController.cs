@@ -72,11 +72,11 @@ namespace DebtRecoveryPlatform.Controllers
                 if (workingDaysCount >= 2)
                 {
                     // Email logic.
-                    if (!DormantDebtList.Any(a => a.ContractNo == debtItem.ContractNo))
+                    if (!DormantDebtList.Any(a => a.BookingRef == debtItem.BookingRef))
                     {
                         DormantDebt dormantDebt = new DormantDebt()
                         {
-                            ContractNo = debtItem.ContractNo,
+                            BookingRef = debtItem.BookingRef,
                             LastActionedDate = (DateTime)debtItem.AllocatedDate
                         };
                         DormantDebtList.Add(dormantDebt);
@@ -91,11 +91,11 @@ namespace DebtRecoveryPlatform.Controllers
                 if (reminderItem.ReminderTypeID == FollowUpID && workingDaysCount >= 2)
                 {
                     // Email logic.
-                    if (!DormantDebtList.Any(a => a.ContractNo == reminderItem.ContractNo))
+                    if (!DormantDebtList.Any(a => a.BookingRef == reminderItem.BookingRef))
                     {
                         DormantDebt dormantDebt = new DormantDebt()
                         {
-                            ContractNo = reminderItem.ContractNo,
+                            BookingRef = reminderItem.BookingRef,
                             LastActionedDate = (DateTime)reminderItem.ReminderDate
                         };
                         DormantDebtList.Add(dormantDebt);
@@ -104,11 +104,11 @@ namespace DebtRecoveryPlatform.Controllers
                 else if (reminderItem.ReminderTypeID == PTPID && workingDaysCount >= 3) // 1 Day ekstra for PTP (1 grace day)
                 {
                     // Email logic.
-                    if (!DormantDebtList.Any(a => a.ContractNo == reminderItem.ContractNo))
+                    if (!DormantDebtList.Any(a => a.BookingRef == reminderItem.BookingRef))
                     {
                         DormantDebt dormantDebt = new DormantDebt()
                         {
-                            ContractNo = reminderItem.ContractNo,
+                            BookingRef = reminderItem.BookingRef,
                             LastActionedDate = (DateTime)reminderItem.ReminderDate
                         };
                         DormantDebtList.Add(dormantDebt);
@@ -125,7 +125,7 @@ namespace DebtRecoveryPlatform.Controllers
 
             foreach (var dormantDebt in DormantDebtList)
             {
-                NotificationMessage.AppendLine("<p>" + dormantDebt.ContractNo + "&emsp;&emsp;&emsp;&emsp;- " + dormantDebt.LastActionedDate.ToString("yyyy/MM/dd") + "</p>");
+                NotificationMessage.AppendLine("<p>" + dormantDebt.BookingRef + "&emsp;&emsp;&emsp;&emsp;- " + dormantDebt.LastActionedDate.ToString("yyyy/MM/dd") + "</p>");
             }
 
             NotificationMessage.AppendLine("<p>Please take a look as to why these contracts are no longer being actioned. </p>");

@@ -8,6 +8,7 @@ namespace DebtRecoveryPlatform.Models.NonPersistent
     public class DormantDebt
     {
         public string ContractNo { get; set; }
+        public string BookingRef { get; set; }
         public DateTime LastActionedDate { get; set; }
 
         public DormantDebt()
@@ -15,9 +16,10 @@ namespace DebtRecoveryPlatform.Models.NonPersistent
 
         }
 
-        public DormantDebt(string _contractNo, DateTime _lastActionedDate)
+        public DormantDebt(string _bookingRef, DateTime _lastActionedDate)
         {
-            ContractNo = _contractNo;
+            //ContractNo = _contractNo;
+            BookingRef = _bookingRef;
             LastActionedDate = _lastActionedDate;
         }
     }

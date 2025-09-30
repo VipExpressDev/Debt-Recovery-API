@@ -8,6 +8,7 @@ namespace DebtRecoveryPlatform.Models.NonPersistent
     public class AllocationHistory
     {
         public string ContractNo { get; set; }
+        public string BookingRef { get; set; }
         public string AllocatedBy { get; set; }
         public string AllocatedTo { get; set; }
         public DateTime DateAllocated { get; set; }
@@ -17,9 +18,10 @@ namespace DebtRecoveryPlatform.Models.NonPersistent
 
         }
 
-        public AllocationHistory(string _contractNo, string _allocatedBy, string _allocatedTo, DateTime _dateAllocated)
+        public AllocationHistory(string _contractNo, string _bookingRef, string _allocatedBy, string _allocatedTo, DateTime _dateAllocated)
         {
             ContractNo = _contractNo;
+            BookingRef = _bookingRef;
             AllocatedBy = _allocatedBy;
             AllocatedTo = _allocatedTo;
             DateAllocated = _dateAllocated;

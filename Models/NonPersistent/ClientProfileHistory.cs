@@ -8,6 +8,7 @@ namespace DebtRecoveryPlatform.Models.NonPersistent
     public class ClientProfileHistory
     {
         public string ContractNo { get; set; }
+        public string BookingRef { get; set; }
         public DateTime DateActioned { get; set; }
         public string ActionedBy { get; set; }
         public string Status { get; set; }
@@ -20,9 +21,10 @@ namespace DebtRecoveryPlatform.Models.NonPersistent
 
         }
 
-        public ClientProfileHistory(string _contractNo, string _actionedBy, string _status, DateTime _dateActioned, string _comment, DateTime _statusDate)
+        public ClientProfileHistory(string _contractNo, string _bookingRef, string _actionedBy, string _status, DateTime _dateActioned, string _comment, DateTime _statusDate)
         {
             ContractNo = _contractNo;
+            BookingRef = _bookingRef;
             ActionedBy = _actionedBy;
             Status = _status;
             DateActioned = _dateActioned;

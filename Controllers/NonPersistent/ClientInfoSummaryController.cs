@@ -28,13 +28,13 @@ namespace DebtRecoveryPlatform.Controllers.NonPersistent
 
         // GET: /ClientInfoSummary/string (Single)
         [HttpGet()]
-        public async Task<IActionResult> Get(string contractNo, int userCode, [FromHeader] string Authorization)
+        public async Task<IActionResult> Get(string bookingRef, int userCode, [FromHeader] string Authorization)
         {            
             var contractTransactions = await _DebtRecoveryDataRepository.GetAll();
-            List<TblDebtRecoveryData> filteredTransactions = contractTransactions.Where(w => w.ContractNo.Contains(contractNo) && (w.AllocatedTo == userCode || w.AllocatedBy == userCode)).ToList();
+            List<TblDebtRecoveryData> filteredTransactions = contractTransactions.Where(w => w.BookingRef.Contains(bookingRef) && (w.AllocatedTo == userCode || w.AllocatedBy == userCode)).ToList();
             List<ClientInfoSummary> summaryOfTransactions = new List<ClientInfoSummary>();
             List<TblDebtRecoveryData> transactionsToUse = new List<TblDebtRecoveryData>();
-            List<PayPlanData> PayPlanDataList = PayPlanData.GetPayPlanData(configuration, contractNo);
+            List<PayPlanData> PayPlanDataList = PayPlanData.GetPayPlanData(configuration, bookingRef);
 
             List<TblDebtRecoveryData> depositList = filteredTransactions.Where(w => w.Type == "Deposit").ToList();
 
@@ -61,6 +61,7 @@ namespace DebtRecoveryPlatform.Controllers.NonPersistent
                 ClientInfoSummary typeSummary = new ClientInfoSummary()
                 {
                     ContractNo = transactionsToUse.Where(w => w.Type.Contains(item.Key)).Distinct().FirstOrDefault().ContractNo,
+                    BookingRef = transactionsToUse.Where(w => w.Type.Contains(item.Key)).Distinct().FirstOrDefault().BookingRef,
                     TransactionType = item.Key,
                     TypeCount = String.Format("{0} out of {1}", debtCount, payPlanCount),
                     TotalDue = transactionsToUse.Where(w => w.Type.Contains(item.Key) && w.TransactionDate <= DateTime.Now).Sum(sm => sm.AmountDue)

@@ -37,12 +37,12 @@ namespace DebtRecoveryPlatform.Controllers
 
         // GET: /TblClientProfileHistory/int (Single)
         [HttpGet(Name = "GetClientProfileHistory")]
-        public async Task<IActionResult> Get(string contract, [FromHeader] string Authorization)
+        public async Task<IActionResult> Get(string bookingRef, [FromHeader] string Authorization)
         {
             var allDebtCollectors = await _DebtCollectorsRepository.GetAll();
             var debtStatusses = await _PrimaryStatusRepository.GetAll();
             var clientProfileHistory = await _ClientProfileHistoryRepository.GetAll();
-            var collectorHistory = clientProfileHistory.Where(w => w.ContractNo.Contains(contract)).OrderByDescending(obd => obd.CreatedDate).ToList();
+            var collectorHistory = clientProfileHistory.Where(w => w.BookingRef.Contains(bookingRef)).OrderByDescending(obd => obd.CreatedDate).ToList();
 
             List<ClientProfileHistory> debtPerformanceList = new List<ClientProfileHistory>();
 
@@ -54,6 +54,7 @@ namespace DebtRecoveryPlatform.Controllers
                 ClientProfileHistory historyItem = new ClientProfileHistory()
                 {
                     ContractNo = history.ContractNo,
+                    BookingRef = history.BookingRef,
                     ActionedBy = collectorName,
                     Status = status,
                     DateActioned = history.DateActioned,

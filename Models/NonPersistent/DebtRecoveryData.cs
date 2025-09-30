@@ -9,6 +9,7 @@ namespace DebtRecoveryPlatform.Models.NonPersistent
     {
         public DateTime? LastDateAssigned { get; set; }
         public string ContractNo { get; set; }
+        public string BookingRef { get; set; }
         public string DebtStatus { get; set; }
         public string AssignedTo { get; set; }
         public string ContractStatus { get; set; }
@@ -19,6 +20,7 @@ namespace DebtRecoveryPlatform.Models.NonPersistent
         public DateTime? PromiseToPayDate { get; set; }
         public DateTime? LastCollectedDate { get; set; }
         public bool isAccumilative { get; set; }
+        public decimal monthsInDebt { get; set; }
 
         public DebtRecoveryData()
         {

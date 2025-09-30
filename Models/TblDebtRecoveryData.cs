@@ -13,6 +13,7 @@ namespace DebtRecoveryPlatform.Models
         public string PvOID { get; set; }
         public string Type { get; set; }
         public string ContractNo { get; set; }
+        public string BookingRef { get; set; }
         public string ClientFullName { get; set; }
         public string Cellphone { get; set; }
         public string VipLevel { get; set; }

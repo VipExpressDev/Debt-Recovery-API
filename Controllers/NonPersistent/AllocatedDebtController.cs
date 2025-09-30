@@ -41,10 +41,10 @@ namespace DebtRecoveryPlatform.Controllers
                 AllocatedDebt debtSummary = new AllocatedDebt()
                 {
                     ContractStatus = debtItem.Key,
-                    ContractsCount = allDebtData.Where(w => w.ContractStatus == debtItem.Key).Select(s => s.ContractNo).Distinct().Count(),
-                    ActionRequiredCount = allDebtData.Where(w => w.ContractStatus == debtItem.Key && w.StatusID == actionReqCode).Select(s => s.ContractNo).Distinct().Count(),
-                    FollowUpCount = allDebtData.Where(w => w.ContractStatus == debtItem.Key && w.StatusID == followUpCode).Select(s => s.ContractNo).Distinct().Count(),
-                    PTPCount = allDebtData.Where(w => w.ContractStatus == debtItem.Key && w.StatusID == ptpCode).Select(s => s.ContractNo).Distinct().Count(),
+                    ContractsCount = allDebtData.Where(w => w.ContractStatus == debtItem.Key).Select(s => s.BookingRef).Distinct().Count(),
+                    ActionRequiredCount = allDebtData.Where(w => w.ContractStatus == debtItem.Key && w.StatusID == actionReqCode).Select(s => s.BookingRef).Distinct().Count(),
+                    FollowUpCount = allDebtData.Where(w => w.ContractStatus == debtItem.Key && w.StatusID == followUpCode).Select(s => s.BookingRef).Distinct().Count(),
+                    PTPCount = allDebtData.Where(w => w.ContractStatus == debtItem.Key && w.StatusID == ptpCode).Select(s => s.BookingRef).Distinct().Count(),
                     TotalAmount = allDebtData.Where(w => w.ContractStatus == debtItem.Key).Sum(sm => sm.AmountDue),
                     isAccu = true
                 };
@@ -57,10 +57,10 @@ namespace DebtRecoveryPlatform.Controllers
                 AllocatedDebt monthDebtSummary = new AllocatedDebt()
                 {
                     ContractStatus = debtItem.Key,
-                    ContractsCount = allDebtData.Where(w => w.ContractStatus == debtItem.Key && w.TransactionDate > new DateTime(DateTime.Now.Year, DateTime.Now.AddMonths(-1).Month, 01)).Select(s => s.ContractNo).Distinct().Count(),
-                    ActionRequiredCount = allDebtData.Where(w => w.ContractStatus == debtItem.Key && w.StatusID == actionReqCode && w.TransactionDate > new DateTime(DateTime.Now.Year, DateTime.Now.AddMonths(-1).Month, 01)).Select(s => s.ContractNo).Distinct().Count(),
-                    FollowUpCount = allDebtData.Where(w => w.ContractStatus == debtItem.Key && w.StatusID == followUpCode && w.TransactionDate > new DateTime(DateTime.Now.Year, DateTime.Now.AddMonths(-1).Month, 01)).Select(s => s.ContractNo).Distinct().Count(),
-                    PTPCount = allDebtData.Where(w => w.ContractStatus == debtItem.Key && w.StatusID == ptpCode && w.TransactionDate > new DateTime(DateTime.Now.Year, DateTime.Now.AddMonths(-1).Month, 01)).Select(s => s.ContractNo).Distinct().Count(),
+                    ContractsCount = allDebtData.Where(w => w.ContractStatus == debtItem.Key && w.TransactionDate > new DateTime(DateTime.Now.Year, DateTime.Now.AddMonths(-1).Month, 01)).Select(s => s.BookingRef).Distinct().Count(),
+                    ActionRequiredCount = allDebtData.Where(w => w.ContractStatus == debtItem.Key && w.StatusID == actionReqCode && w.TransactionDate > new DateTime(DateTime.Now.Year, DateTime.Now.AddMonths(-1).Month, 01)).Select(s => s.BookingRef).Distinct().Count(),
+                    FollowUpCount = allDebtData.Where(w => w.ContractStatus == debtItem.Key && w.StatusID == followUpCode && w.TransactionDate > new DateTime(DateTime.Now.Year, DateTime.Now.AddMonths(-1).Month, 01)).Select(s => s.BookingRef).Distinct().Count(),
+                    PTPCount = allDebtData.Where(w => w.ContractStatus == debtItem.Key && w.StatusID == ptpCode && w.TransactionDate > new DateTime(DateTime.Now.Year, DateTime.Now.AddMonths(-1).Month, 01)).Select(s => s.BookingRef).Distinct().Count(),
                     TotalAmount = allDebtData.Where(w => w.ContractStatus == debtItem.Key && w.TransactionDate > new DateTime(DateTime.Now.Year, DateTime.Now.AddMonths(-1).Month, 01)).Sum(sm => sm.AmountDue),
                     isAccu = false
                 };
@@ -88,10 +88,10 @@ namespace DebtRecoveryPlatform.Controllers
                 AllocatedDebt debtSummary = new AllocatedDebt()
                 {
                     ContractStatus = debtItem.Key,
-                    ContractsCount = filteredDebtData.Where(w => w.ContractStatus == debtItem.Key).Select(s => s.ContractNo).Distinct().Count(),
-                    ActionRequiredCount = filteredDebtData.Where(w => w.ContractStatus == debtItem.Key && w.StatusID == actionReqCode).Select(s => s.ContractNo).Distinct().Count(),
-                    FollowUpCount = filteredDebtData.Where(w => w.ContractStatus == debtItem.Key && w.StatusID == followUpCode).Select(s => s.ContractNo).Distinct().Count(),
-                    PTPCount = filteredDebtData.Where(w => w.ContractStatus == debtItem.Key && w.StatusID == ptpCode).Select(s => s.ContractNo).Distinct().Count(),
+                    ContractsCount = filteredDebtData.Where(w => w.ContractStatus == debtItem.Key).Select(s => s.BookingRef).Distinct().Count(),
+                    ActionRequiredCount = filteredDebtData.Where(w => w.ContractStatus == debtItem.Key && w.StatusID == actionReqCode).Select(s => s.BookingRef).Distinct().Count(),
+                    FollowUpCount = filteredDebtData.Where(w => w.ContractStatus == debtItem.Key && w.StatusID == followUpCode).Select(s => s.BookingRef).Distinct().Count(),
+                    PTPCount = filteredDebtData.Where(w => w.ContractStatus == debtItem.Key && w.StatusID == ptpCode).Select(s => s.BookingRef).Distinct().Count(),
                     TotalAmount = filteredDebtData.Where(w => w.ContractStatus == debtItem.Key).Sum(sm => sm.AmountDue),
                     isAccu = true
                 };
@@ -104,10 +104,10 @@ namespace DebtRecoveryPlatform.Controllers
                 AllocatedDebt monthDebtSummary = new AllocatedDebt()
                 {
                     ContractStatus = debtItem.Key,
-                    ContractsCount = filteredDebtData.Where(w => w.ContractStatus == debtItem.Key && w.TransactionDate > new DateTime(DateTime.Now.Year, DateTime.Now.AddMonths(-1).Month, 01)).Select(s => s.ContractNo).Distinct().Count(),
-                    ActionRequiredCount = filteredDebtData.Where(w => w.ContractStatus == debtItem.Key && w.StatusID == actionReqCode && w.TransactionDate > new DateTime(DateTime.Now.Year, DateTime.Now.AddMonths(-1).Month, 01)).Select(s => s.ContractNo).Distinct().Count(),
-                    FollowUpCount = filteredDebtData.Where(w => w.ContractStatus == debtItem.Key && w.StatusID == followUpCode && w.TransactionDate > new DateTime(DateTime.Now.Year, DateTime.Now.AddMonths(-1).Month, 01)).Select(s => s.ContractNo).Distinct().Count(),
-                    PTPCount = filteredDebtData.Where(w => w.ContractStatus == debtItem.Key && w.StatusID == ptpCode && w.TransactionDate > new DateTime(DateTime.Now.Year, DateTime.Now.AddMonths(-1).Month, 01)).Select(s => s.ContractNo).Distinct().Count(),
+                    ContractsCount = filteredDebtData.Where(w => w.ContractStatus == debtItem.Key && w.TransactionDate > new DateTime(DateTime.Now.Year, DateTime.Now.AddMonths(-1).Month, 01)).Select(s => s.BookingRef).Distinct().Count(),
+                    ActionRequiredCount = filteredDebtData.Where(w => w.ContractStatus == debtItem.Key && w.StatusID == actionReqCode && w.TransactionDate > new DateTime(DateTime.Now.Year, DateTime.Now.AddMonths(-1).Month, 01)).Select(s => s.BookingRef).Distinct().Count(),
+                    FollowUpCount = filteredDebtData.Where(w => w.ContractStatus == debtItem.Key && w.StatusID == followUpCode && w.TransactionDate > new DateTime(DateTime.Now.Year, DateTime.Now.AddMonths(-1).Month, 01)).Select(s => s.BookingRef).Distinct().Count(),
+                    PTPCount = filteredDebtData.Where(w => w.ContractStatus == debtItem.Key && w.StatusID == ptpCode && w.TransactionDate > new DateTime(DateTime.Now.Year, DateTime.Now.AddMonths(-1).Month, 01)).Select(s => s.BookingRef).Distinct().Count(),
                     TotalAmount = filteredDebtData.Where(w => w.ContractStatus == debtItem.Key && w.TransactionDate > new DateTime(DateTime.Now.Year, DateTime.Now.AddMonths(-1).Month, 01)).Sum(sm => sm.AmountDue),
                     isAccu = false
                 };
@@ -134,10 +134,10 @@ namespace DebtRecoveryPlatform.Controllers
                 AllocatedDebt debtSummary = new AllocatedDebt()
                 {
                     ContractStatus = debtItem.Key,
-                    ContractsCount = filteredDebtData.Where(w => w.ContractStatus == debtItem.Key).Select(s => s.ContractNo).Distinct().Count(),
-                    ActionRequiredCount = filteredDebtData.Where(w => w.ContractStatus == debtItem.Key && w.StatusID == actionReqCode).Select(s => s.ContractNo).Distinct().Count(),
-                    FollowUpCount = filteredDebtData.Where(w => w.ContractStatus == debtItem.Key && w.StatusID == followUpCode).Select(s => s.ContractNo).Distinct().Count(),
-                    PTPCount = filteredDebtData.Where(w => w.ContractStatus == debtItem.Key && w.StatusID == ptpCode).Select(s => s.ContractNo).Distinct().Count(),
+                    ContractsCount = filteredDebtData.Where(w => w.ContractStatus == debtItem.Key).Select(s => s.BookingRef).Distinct().Count(),
+                    ActionRequiredCount = filteredDebtData.Where(w => w.ContractStatus == debtItem.Key && w.StatusID == actionReqCode).Select(s => s.BookingRef).Distinct().Count(),
+                    FollowUpCount = filteredDebtData.Where(w => w.ContractStatus == debtItem.Key && w.StatusID == followUpCode).Select(s => s.BookingRef).Distinct().Count(),
+                    PTPCount = filteredDebtData.Where(w => w.ContractStatus == debtItem.Key && w.StatusID == ptpCode).Select(s => s.BookingRef).Distinct().Count(),
                     TotalAmount = filteredDebtData.Where(w => w.ContractStatus == debtItem.Key).Sum(sm => sm.AmountDue),
                     isAccu = true
                 };
@@ -150,10 +150,10 @@ namespace DebtRecoveryPlatform.Controllers
                 AllocatedDebt monthDebtSummary = new AllocatedDebt()
                 {
                     ContractStatus = debtItem.Key,
-                    ContractsCount = filteredDebtData.Where(w => w.ContractStatus == debtItem.Key && w.TransactionDate > new DateTime(DateTime.Now.Year, DateTime.Now.AddMonths(-1).Month, 01)).Select(s => s.ContractNo).Distinct().Count(),
-                    ActionRequiredCount = filteredDebtData.Where(w => w.ContractStatus == debtItem.Key && w.StatusID == actionReqCode && w.TransactionDate > new DateTime(DateTime.Now.Year, DateTime.Now.AddMonths(-1).Month, 01)).Select(s => s.ContractNo).Distinct().Count(),
-                    FollowUpCount = filteredDebtData.Where(w => w.ContractStatus == debtItem.Key && w.StatusID == followUpCode && w.TransactionDate > new DateTime(DateTime.Now.Year, DateTime.Now.AddMonths(-1).Month, 01)).Select(s => s.ContractNo).Distinct().Count(),
-                    PTPCount = filteredDebtData.Where(w => w.ContractStatus == debtItem.Key && w.StatusID == ptpCode && w.TransactionDate > new DateTime(DateTime.Now.Year, DateTime.Now.AddMonths(-1).Month, 01)).Select(s => s.ContractNo).Distinct().Count(),
+                    ContractsCount = filteredDebtData.Where(w => w.ContractStatus == debtItem.Key && w.TransactionDate > new DateTime(DateTime.Now.Year, DateTime.Now.AddMonths(-1).Month, 01)).Select(s => s.BookingRef).Distinct().Count(),
+                    ActionRequiredCount = filteredDebtData.Where(w => w.ContractStatus == debtItem.Key && w.StatusID == actionReqCode && w.TransactionDate > new DateTime(DateTime.Now.Year, DateTime.Now.AddMonths(-1).Month, 01)).Select(s => s.BookingRef).Distinct().Count(),
+                    FollowUpCount = filteredDebtData.Where(w => w.ContractStatus == debtItem.Key && w.StatusID == followUpCode && w.TransactionDate > new DateTime(DateTime.Now.Year, DateTime.Now.AddMonths(-1).Month, 01)).Select(s => s.BookingRef).Distinct().Count(),
+                    PTPCount = filteredDebtData.Where(w => w.ContractStatus == debtItem.Key && w.StatusID == ptpCode && w.TransactionDate > new DateTime(DateTime.Now.Year, DateTime.Now.AddMonths(-1).Month, 01)).Select(s => s.BookingRef         ).Distinct().Count(),
                     TotalAmount = filteredDebtData.Where(w => w.ContractStatus == debtItem.Key && w.TransactionDate > new DateTime(DateTime.Now.Year, DateTime.Now.AddMonths(-1).Month, 01)).Sum(sm => sm.AmountDue),
                     isAccu = false
                 };

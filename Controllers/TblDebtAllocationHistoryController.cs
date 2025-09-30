@@ -43,10 +43,12 @@ namespace DebtRecoveryPlatform.Controllers
                 string collectorName = debtCollectors.Where(w => w.PersonnelCode == historyItem.AllocatedTo).FirstOrDefault().NameAndSurname;
                 string managerName = debtCollectors.Where(w => w.PersonnelCode == historyItem.AllocatedBy).FirstOrDefault().NameAndSurname;
                 string contractNo = debtRecoveryData.Where(w => w.Id == historyItem.DebtItemID).FirstOrDefault().ContractNo;
+                string BookingRef = debtRecoveryData.Where(w => w.Id == historyItem.DebtItemID).FirstOrDefault().BookingRef;
 
                 AllocationHistory HistoryLine = new AllocationHistory()
                 {
                     ContractNo = contractNo,
+                    BookingRef = BookingRef,
                     AllocatedBy = managerName,
                     AllocatedTo = collectorName,
                     DateAllocated = historyItem.DateAllocated
@@ -60,7 +62,7 @@ namespace DebtRecoveryPlatform.Controllers
 
         // GET: /TblDebtAllocationHistory/int (Single)
         [HttpGet("GetDebtAllocationHistory")]
-        public async Task<IActionResult> Get(int debtManagerID, [FromHeader] string Authorization, string contractNo)
+        public async Task<IActionResult> Get(int debtManagerID, [FromHeader] string Authorization, string bookingRef)
         {
             var debtAllocationHistory = await _DebtAllocationHistoryRepository.GetAll();
             var debtAllocationHistoryList = debtAllocationHistory.Where(w => w.AllocatedBy == debtManagerID).ToList();
@@ -73,8 +75,10 @@ namespace DebtRecoveryPlatform.Controllers
             {
                 string collectorName = debtCollectors.Where(w => w.PersonnelCode == historyItem.AllocatedTo).FirstOrDefault()?.NameAndSurname;
                 string managerName = debtCollectors.Where(w => w.PersonnelCode == historyItem.AllocatedBy).FirstOrDefault()?.NameAndSurname;
-                contractNo = debtRecoveryData.Where(w => w.Id == historyItem.DebtItemID).FirstOrDefault()?.ContractNo;
-                if (contractNo == null)
+                string contractNo = debtRecoveryData.Where(w => w.Id == historyItem.DebtItemID).FirstOrDefault()?.ContractNo;
+                bookingRef = debtRecoveryData.Where(w => w.Id == historyItem.DebtItemID).FirstOrDefault()?.BookingRef;
+
+            if (bookingRef == null)
                 {
                     continue;
                 }
@@ -82,6 +86,7 @@ namespace DebtRecoveryPlatform.Controllers
                 AllocationHistory HistoryLine = new AllocationHistory()
                 {
                     ContractNo = contractNo,
+                    BookingRef = bookingRef,
                     AllocatedBy = managerName,
                     AllocatedTo = collectorName,
                     DateAllocated = historyItem.DateAllocated

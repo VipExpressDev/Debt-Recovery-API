@@ -19,23 +19,23 @@ namespace DebtRecoveryPlatform.Controllers.NonPersistent
         }
 
         [HttpGet("GetContractData")]
-        public IActionResult GetContractData(string contractNo, [FromHeader] string Authorization)
+        public IActionResult GetContractData(string bookingRef, [FromHeader] string Authorization)
         {
-            ContractData ContractData = ContractData.GetContractData(configuration, contractNo);
+            ContractData ContractData = ContractData.GetContractData(configuration, bookingRef);
             return new OkObjectResult(new ResponseObject<ContractData>(ContractData, Authorization));
         }
 
         [HttpGet("GetPayPlanData")]
-        public IActionResult GetPayPlanData(string contractNo, [FromHeader] string Authorization)
+        public IActionResult GetPayPlanData(string bookingRef, [FromHeader] string Authorization)
         {
-            List<PayPlanData> PayPlanDataList = PayPlanData.GetPayPlanData(configuration, contractNo);
+            List<PayPlanData> PayPlanDataList = PayPlanData.GetPayPlanData(configuration, bookingRef);
             return new OkObjectResult(new ResponseObject<PayPlanData>(PayPlanDataList.OrderBy(ob => ob.DateOfPayment).ToList(), Authorization));
         }
 
         [HttpGet("GetPortfolioNumbers")]
-        public IActionResult GetPortfolioNumbers(string contractNo, [FromHeader] string Authorization)
+        public IActionResult GetPortfolioNumbers(string bookingRef, [FromHeader] string Authorization)
         {
-            List<string> PayPlanDataList = ContractData.GetPortfolioNumbers(configuration, contractNo);
+            List<string> PayPlanDataList = ContractData.GetPortfolioNumbers(configuration, bookingRef);
             return new OkObjectResult(new ResponseProperty(PayPlanDataList, Authorization));
         }
 

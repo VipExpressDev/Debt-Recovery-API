@@ -9,6 +9,7 @@ namespace DebtRecoveryPlatform.Models.NonPersistent
     {
         public int DebtItemId { get; set; }
         public string ContractNo { get; set; }
+        public string BookingRef { get; set; }
         public string ContractVIPLevel { get; set; }
         public string ContractStatus { get; set; }
         public string ClientFullName { get; set; }
@@ -22,9 +23,10 @@ namespace DebtRecoveryPlatform.Models.NonPersistent
 
         }
 
-        public AssignableContracts(string _contractNo, string _contractVIPLevel, string _contractStatus, string _clientFullName, DateTime? _dateOfSale, decimal _amountDue, int _totalTransactions, int _debtItemId)
+        public AssignableContracts(string _contractNo, string _bookingRef, string _contractVIPLevel, string _contractStatus, string _clientFullName, DateTime? _dateOfSale, decimal _amountDue, int _totalTransactions, int _debtItemId)
         {
             ContractNo = _contractNo;
+            BookingRef = _bookingRef;
             ContractVIPLevel = _contractVIPLevel;
             ContractStatus = _contractStatus;
             ClientFullName = _clientFullName;
@@ -34,9 +36,10 @@ namespace DebtRecoveryPlatform.Models.NonPersistent
             DebtItemId = _debtItemId;
         }
 
-        public AssignableContracts(string _contractNo, string _contractVIPLevel, string _contractStatus, string _clientFullName, DateTime? _dateOfSale, decimal _amountDue, int _totalTransactions, string _allocatedTo)
+        public AssignableContracts(string _contractNo, string _bookingRef, string _contractVIPLevel, string _contractStatus, string _clientFullName, DateTime? _dateOfSale, decimal _amountDue, int _totalTransactions, string _allocatedTo)
         {
             ContractNo = _contractNo;
+            BookingRef = _bookingRef;
             ContractVIPLevel = _contractVIPLevel;
             ContractStatus = _contractStatus;
             ClientFullName = _clientFullName;

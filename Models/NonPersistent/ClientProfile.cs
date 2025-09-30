@@ -9,6 +9,7 @@ namespace DebtRecoveryPlatform.Models.NonPersistent
     public class ClientProfile : BaseClass
     {
         public string ContractNo { get; set; }
+        public string BookingRef { get; set; }
         public string VipLevel { get; set; }
         public string ContractStatus { get; set; }
         public DateTime DateOfSale { get; set; }

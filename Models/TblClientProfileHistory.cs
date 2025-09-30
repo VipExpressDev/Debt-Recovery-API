@@ -11,6 +11,7 @@ namespace DebtRecoveryPlatform.Models
         [Key]
         public int Id { get; set; }
         public string ContractNo { get; set; }
+        public string BookingRef { get; set; }
         public DateTime DateActioned { get; set; }
         public int ActionedByID { get; set; }
         public int StatusID { get; set; }
