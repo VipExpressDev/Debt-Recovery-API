@@ -152,24 +152,9 @@
 
                 worksheet.Cells[i + 2, 2].Value = data[i].Count;
                 worksheet.Cells[i + 2, 3].Value = (double)data[i].TotalAmount;
+                worksheet.Cells[i + 2, 3].Style.Numberformat.Format = "#,##0.00";
                 worksheet.Cells[i + 2, 4].Value = (data[i].PortfolioPercent);
                 worksheet.Cells[i + 2, 4].Style.Numberformat.Format = "0.00%";
-            }
-
-            //worksheet.Cells.AutoFitColumns();
-
-            // 💰 Format Amount Columns (2–5) as 2-decimal numeric
-            using (var amountRange = worksheet.Cells[2, 2, data.Count + 1, 5])
-            {
-                amountRange.Style.Numberformat.Format = "#,##0.00";
-                amountRange.Style.HorizontalAlignment = ExcelHorizontalAlignment.Right;
-            }
-
-            // 📊 Format Percentage Column
-            using (var rateRange = worksheet.Cells[2, 4, data.Count + 1, 6])
-            {
-                rateRange.Style.Numberformat.Format = "0.00%";
-                rateRange.Style.HorizontalAlignment = ExcelHorizontalAlignment.Right;
             }
 
             // Auto-fit columns and freeze header
@@ -226,7 +211,7 @@
             {
                 worksheet.Cells[i + 2, 1].Value = data[i].ContractNo;
 
-                worksheet.Cells[i + 2, 2].Value = data[i].DateCreated.ToString("dd/mm/yyyy");
+                worksheet.Cells[i + 2, 2].Value = data[i].DateCreated.ToString("dd/MM/yyyy");
                 worksheet.Cells[i + 2, 3].Value = data[i].CreatedBy;
                 worksheet.Cells[i + 2, 4].Value = data[i].Comment;
 

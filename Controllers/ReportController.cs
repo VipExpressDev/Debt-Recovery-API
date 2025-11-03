@@ -50,8 +50,8 @@ namespace DebtRecoveryPlatform.Controllers
 
 
             var useDebtData = await _DebtRecoveryDataRepository.GetAll();
-            var allDebtData = useDebtData.Where(w => managerCode != isManager  || w.AllocatedBy == managerCode
-             &&(!from.HasValue || w.TransactionDate >= from.Value) &&
+            var allDebtData = useDebtData.Where(w => managerCode == isManager ? w.AllocatedBy == managerCode : w.AllocatedTo == managerCode
+             && (!from.HasValue || w.TransactionDate >= from.Value) &&
                (!to.HasValue || w.TransactionDate <= to.Value)
                &&((!collector.HasValue || collector == 0) || collector == w.AllocatedTo)
             ).ToList();
@@ -104,11 +104,31 @@ namespace DebtRecoveryPlatform.Controllers
             var isManager = allDebtCollectors.Where(x => x.PersonnelCode == managerCode && x.isManager && x.GCRecord == null).FirstOrDefault()?.PersonnelCode;
 
             var allData = await _DebtRecoveryDataRepository.GetAll();
-            var debtRecoveryData = allData.Where(w => managerCode != isManager || w.AllocatedBy == managerCode
-             && (!from.HasValue || w.TransactionDate >= from.Value) &&
-               (!to.HasValue || w.TransactionDate <= to.Value)
-               && ((!collector.HasValue || collector == 0) || collector == w.AllocatedTo)
-            ).ToList();
+
+            //var debtRecoveryData = allData.Where(w => managerCode != isManager || w.AllocatedBy == managerCode
+            // && (!from.HasValue || w.TransactionDate >= from.Value) &&
+            //   (!to.HasValue || w.TransactionDate <= to.Value)
+            //   && ((!collector.HasValue || collector == 0) || collector == w.AllocatedTo)
+            //).GroupBy(gb => gb.BookingRef).ToList();
+
+            var debtRecoveryData = allData
+                .Where(w =>
+                    (managerCode == isManager? w.AllocatedBy == managerCode : w.AllocatedTo == managerCode) &&
+                    (!from.HasValue || w.TransactionDate >= from.Value) &&
+                    (!to.HasValue || w.TransactionDate <= to.Value) &&
+                    ((!collector.HasValue || collector == 0) || collector == w.AllocatedTo)
+                )
+                .GroupBy(gb => gb.ContractNo)
+                .Select(g => new
+                {
+                    ContractNo = g.Key,
+                    AmountDue = g.Sum(x => x.AmountDue),
+                    TransactionAmount = g.Sum(x => x.TransactionAmount),
+                    StatusID = g.FirstOrDefault()?.StatusID,
+                    DebtSatisfied = g.FirstOrDefault()?.DebtSatisfied
+                })
+                .ToList();
+
 
             var debtStatus = await _PrimaryStatusRepository.GetAll();
 
@@ -175,16 +195,14 @@ namespace DebtRecoveryPlatform.Controllers
             var collectors = new List<(int, string)>();
             var collectorCode = new List<int>();
 
-            if (isManager != null)
-            {
-                collectors = allDebtCollectors
-                    .Where(x => x.RegionID == isManager.RegionID)
-                    .Select(x => (Code: x.PersonnelCode, Name: x.NameAndSurname))
-                    .ToList();
 
-                collectorCode = collectors.Select(x => x.Item1)
-                    .ToList();
-            }
+            collectors = allDebtCollectors
+                .Where(x => x.RegionID == isManager?.RegionID || x.PersonnelCode == managerCode)
+                .Select(x => (Code: x.PersonnelCode, Name: x.NameAndSurname))
+                .ToList();
+
+            collectorCode = collectors.Select(x => x.Item1)
+                .ToList();
 
 
             var allClientHistory = await _ClientProfileHistoryRepository.GetAll();
